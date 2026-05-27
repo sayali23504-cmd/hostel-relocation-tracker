@@ -1,0 +1,108 @@
+:root {
+  --bg: #0d1b2a;
+  --bg2: #1b263b;
+  --surface: #243b55;
+  --ink: #f4f6f9;
+  --accent: #3ddc97;
+  --warn: #ff7a7a;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--ink);
+  background: linear-gradient(130deg, var(--bg), var(--bg2));
+  min-height: 100vh;
+}
+
+.shell {
+  width: min(1150px, 94vw);
+  margin: 24px auto;
+}
+
+header h1 { margin-bottom: 4px; }
+header p { margin-top: 0; opacity: 0.9; }
+
+.panel {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  padding: 16px;
+  backdrop-filter: blur(4px);
+}
+
+.auth-wrap {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 14px;
+}
+
+.auth-card {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 14px;
+}
+
+form { display: grid; gap: 10px; }
+input, button {
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 10px;
+  font: inherit;
+}
+
+input { background: rgba(255, 255, 255, 0.08); color: var(--ink); }
+button {
+  background: var(--accent);
+  color: #0e1b2b;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+}
+button.secondary { background: #a9c5d3; }
+
+.hidden { display: none; }
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin: 14px 0;
+}
+
+.stat {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.room-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px;
+}
+
+.room-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.room-card h3 { margin: 0 0 6px; }
+.room-card p { margin: 6px 0; }
+.room-card ul { margin: 8px 0; padding-left: 18px; }
+
+.message {
+  min-height: 24px;
+  font-weight: 600;
+  color: var(--accent);
+}
