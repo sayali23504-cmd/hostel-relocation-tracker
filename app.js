@@ -132,7 +132,8 @@ async function loadDashboard() {
 
 document.getElementById("signupForm").addEventListener("submit", async (e) => {
   e.preventDefault();
-  const fd = new FormData(e.currentTarget);
+  const form = e.currentTarget;
+  const fd = new FormData(form);
 
   try {
     await api("/api/auth/signup", "POST", {
@@ -141,7 +142,7 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
       password: fd.get("password"),
     });
     setMessage("Signup successful. Please sign in.");
-    e.currentTarget.reset();
+    form.reset();
   } catch (err) {
     setMessage(err.message, true);
   }
@@ -149,7 +150,8 @@ document.getElementById("signupForm").addEventListener("submit", async (e) => {
 
 document.getElementById("signinForm").addEventListener("submit", async (e) => {
   e.preventDefault();
-  const fd = new FormData(e.currentTarget);
+  const form = e.currentTarget;
+  const fd = new FormData(form);
 
   try {
     const data = await api("/api/auth/signin", "POST", {
@@ -158,7 +160,7 @@ document.getElementById("signinForm").addEventListener("submit", async (e) => {
     });
     saveSession(data.token, data.user);
     setMessage("Signed in successfully.");
-    e.currentTarget.reset();
+    form.reset();
     await loadDashboard();
   } catch (err) {
     setMessage(err.message, true);
@@ -167,7 +169,8 @@ document.getElementById("signinForm").addEventListener("submit", async (e) => {
 
 document.getElementById("wardenForm").addEventListener("submit", async (e) => {
   e.preventDefault();
-  const fd = new FormData(e.currentTarget);
+  const form = e.currentTarget;
+  const fd = new FormData(form);
 
   try {
     const data = await api("/api/auth/warden-login", "POST", {
@@ -175,7 +178,7 @@ document.getElementById("wardenForm").addEventListener("submit", async (e) => {
     });
     saveSession(data.token, data.user);
     setMessage("Warden login successful.");
-    e.currentTarget.reset();
+    form.reset();
     await loadDashboard();
   } catch (err) {
     setMessage(err.message, true);
