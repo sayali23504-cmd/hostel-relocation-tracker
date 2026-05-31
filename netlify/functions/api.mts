@@ -23,7 +23,7 @@ function buildRoomList() {
   for (const block of blocks) {
     for (let floor = 1; floor <= 3; floor += 1) {
       for (let n = 1; n <= 10; n += 1) {
-        const suffix = `${floor}0${n}`;
+        const suffix = `${floor}${String(n).padStart(2, "0")}`;
         const roomId = `${block}${suffix}`;
         roomList.push({
           roomId,
@@ -50,6 +50,7 @@ function verifyToken(token) {
   if (!body || !sig) return null;
 
   const expected = createHmac("sha256", TOKEN_SECRET).update(body).digest("base64url");
+  if (sig.length !== expected.length) return null;
   if (!timingSafeEqual(Buffer.from(sig), Buffer.from(expected))) return null;
 
   const payload = JSON.parse(Buffer.from(body, "base64url").toString("utf8"));
@@ -137,6 +138,10 @@ async function handleSignin(req) {
   if (!user) return json({ error: "Invalid credentials." }, 401);
 
   const checkHash = hashPassword(password, user.salt);
+  if (checkHash.length !== user.passwordHash.length) {
+    return json({ error: "Invalid credentials." }, 401);
+  }
+
   if (!timingSafeEqual(Buffer.from(checkHash), Buffer.from(user.passwordHash))) {
     return json({ error: "Invalid credentials." }, 401);
   }
